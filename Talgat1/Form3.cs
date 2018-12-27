@@ -11,133 +11,124 @@ namespace Talgat1
 {
     public partial class Form3 : Form
     {
-        public class Figure //все элементы
+        public class classFigure //общий класс свойств
         {
-            //public bool doDraw;
-            public int X1, Y1, X2, Y2; //общие свойства всех элементов
-            public int TypeOfFigure;
-            
-            public void DrawRectangle(Graphics a) //отрисовка прямоугольника
+            public int x1, y1, x2, y2;
+            public int typeOfFigure;
+            public void choiceFigure(int _in)//что ты хотел с этим сделать??????????????????????????????
             {
-                a.DrawRectangle(new Pen(Brushes.Black, 2), X1, Y1, X2-X1, Y2-Y1);
+                typeOfFigure = _in;
             }
-            public void DrawEllipse(Graphics a) //отрисовка элипса
+        }
+        
+        public class classRectangle : classFigure
+        {
+            public void drawRectangle(Graphics a) //отрисовка прямоугольника
             {
-                //a.DrawEllipse(new Pen(Brushes.Black, 2), X, Y, (deltaX - X), (deltaY - Y));
-                //a.FillEllipse(new SolidBrush(Color.Red), X, Y, (deltaX - X), (deltaY - Y));
-                a.DrawEllipse(new Pen(Brushes.Black, 2), X1, Y1, X2-X1, Y2-Y1);
+                a.DrawRectangle(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, y2 - y1);
             }
-            public void DrawRound(Graphics a) //отрисовка круга
+        }
+        public class classEllipse : classFigure
+        {
+            public void drawEllipse(Graphics a) //отрисовка элипса
             {
-                a.DrawEllipse(new Pen(Brushes.Black, 2), X1, Y1, X2 - X1, X2 - X1);
+                a.DrawEllipse(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, y2 - y1);
             }
-            public void DrawLine(Graphics a) //отрисовка линии
+        }
+        public class classRound : classFigure
+        {
+            public void drawRound(Graphics a) //отрисовка круга
             {
-                a.DrawLine(new Pen(Brushes.Black, 2), X1, Y1, X2, Y2);
+                a.DrawEllipse(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, x2 - x1);
             }
-            public void DrawLines(Graphics a) //отрисовка линии
+        }
+        public class classLine : classFigure
+        {
+            public void drawLine(Graphics a) //отрисовка линии
             {
-                Point[] points = {new Point(X1,Y1), new Point(X1,Y2), new Point(X2,Y1), new Point(X1,Y1)};
+                a.DrawLine(new Pen(Brushes.Black, 2), x1, y1, x2, y2);
+            }
+        }
+        public class classTriangle : classFigure
+        {
+            public void drawTriangle(Graphics a) //отрисовка треугольника
+            {
+                Point[] points = { new Point(x1, y1), new Point(x1, y2), new Point(x2, y1), new Point(x1, y1) };
                 a.DrawLines(new Pen(Brushes.Black, 2), points);
             }
         }
 
-        Figure figure = new Figure();
-
+        classFigure objectFigure = new classFigure();
+        classRectangle objectRectangle = new classRectangle(); 
+        classEllipse objectEllipse = new classEllipse();
+        classRound objectRound = new classRound();
+        classLine objectLine = new classLine();
+        classTriangle objectTriangle = new classTriangle();
+  
         public Form3()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e) //отрисовка прямоугольника
+        public void button1_Click(object sender, EventArgs e) //отрисовка прямоугольника
         {
-            figure.TypeOfFigure = 1;
+             objectFigure.choiceFigure(1);
         }
-
         private void button2_Click(object sender, EventArgs e) //отрисовка элипса
         {
-            figure.TypeOfFigure = 2;
+            objectFigure.choiceFigure(2);
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
-            figure.TypeOfFigure = 3;
+            objectFigure.choiceFigure(3);
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            figure.TypeOfFigure = 4;
+            objectFigure.choiceFigure(4);
         }
-
         private void button6_Click(object sender, EventArgs e)
         {
-            figure.TypeOfFigure = 5;
+            objectFigure.choiceFigure(5);
         }
-
         private void panel1_MouseDown(object sender, MouseEventArgs e) //фиксирование начала координат для элемента
         {
-            textBox3.Text=(figure.X1 = e.X).ToString();
-            textBox4.Text = (figure.Y1 = e.Y).ToString();
-            //figure.doDraw = true;
+            textBox3.Text = (objectFigure.x1 = e.X).ToString();
+            textBox4.Text = (objectFigure.y1 = e.Y).ToString();
         }
-        
         private void panel1_MouseUp(object sender, MouseEventArgs e) 
         {
-            textBox5.Text = (figure.X2 = e.X).ToString();
-            textBox6.Text = (figure.Y2 = e.Y).ToString();
-            //figure.doDraw = false;
+            textBox5.Text = (objectFigure.x2 = e.X).ToString();
+            textBox6.Text = (objectFigure.y2 = e.Y).ToString();
             Graphics g = Graphics.FromHwnd(panel1.Handle);
-            switch (figure.TypeOfFigure)
+
+            switch (objectFigure.typeOfFigure)
             {
                 case 1:
-                    figure.DrawRectangle(g);
+                    objectRectangle.drawRectangle(g);
                     break;
                 case 2:
-                    figure.DrawEllipse(g);
+                    objectEllipse.drawEllipse(g);
                     break;
                 case 3:
-                    figure.DrawRound(g);
+                    objectRound.drawRound(g);
                     break;
                 case 4:
-                    figure.DrawLine(g);
+                    objectLine.drawLine(g);
                     break;
                 case 5:
-                    figure.DrawLines(g);
+                    objectTriangle.drawTriangle(g);
                     break;
                 default:
                     break;
             }
         }
-
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             textBox1.Text = e.X.ToString();
             textBox2.Text = e.Y.ToString();
-
-            /*Graphics g = Graphics.FromHwnd(panel1.Handle);
-            if (figure.doDraw)
-            {
-                switch (figure.TypeOfFigure)
-                {
-                    case 1:
-                        figure.DrawRectangle(g);
-                        break;
-                    case 2:
-                        figure.DrawRound(g, e.X, e.Y);
-                        break;
-                    default:
-                        break;
-                }
-            }*/
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            panel1.BackColor = Color.White;
-        }
-
-        private void panel1_Click(object sender, EventArgs e)
-        {
-            
+            panel1.BackColor = Color.White; //работает на раз
         }
     }
 }
