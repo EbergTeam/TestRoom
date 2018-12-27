@@ -11,121 +11,122 @@ namespace Talgat1
 {
     public partial class Form3 : Form
     {
-        public class classFigure //общий класс свойств
+        #region С помощью этой херни можно группировать, но лучше все равно закинь в отдельную папку и в отдельные файлы
+
+        public abstract class Figure //общий класс свойств
         {
             public int x1, y1, x2, y2;
-            public int typeOfFigure;
-            public void choiceFigure(int _in)//что ты хотел с этим сделать??????????????????????????????
-            {
-                typeOfFigure = _in;
-            }
+
+            public abstract void Draw(Graphics a);
         }
-        
-        public class classRectangle : classFigure
+
+        public class Rectangle : Figure
         {
-            public void drawRectangle(Graphics a) //отрисовка прямоугольника
+            public override void Draw(Graphics a)
             {
                 a.DrawRectangle(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, y2 - y1);
             }
         }
-        public class classEllipse : classFigure
+
+        public class Ellipse : Figure
         {
-            public void drawEllipse(Graphics a) //отрисовка элипса
+            public override void Draw(Graphics a)
             {
                 a.DrawEllipse(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, y2 - y1);
             }
         }
-        public class classRound : classFigure
+
+        public class Round : Figure
         {
-            public void drawRound(Graphics a) //отрисовка круга
+            public override void Draw(Graphics a)
             {
                 a.DrawEllipse(new Pen(Brushes.Black, 2), x1, y1, x2 - x1, x2 - x1);
             }
         }
-        public class classLine : classFigure
+
+        public class Line : Figure
         {
-            public void drawLine(Graphics a) //отрисовка линии
+            public override void Draw(Graphics a)
             {
                 a.DrawLine(new Pen(Brushes.Black, 2), x1, y1, x2, y2);
             }
         }
-        public class classTriangle : classFigure
+
+        public class Triangle : Figure
         {
-            public void drawTriangle(Graphics a) //отрисовка треугольника
+            public override void Draw(Graphics a)
             {
                 Point[] points = { new Point(x1, y1), new Point(x1, y2), new Point(x2, y1), new Point(x1, y1) };
                 a.DrawLines(new Pen(Brushes.Black, 2), points);
             }
         }
 
-        classFigure objectFigure = new classFigure();
-        classRectangle objectRectangle = new classRectangle(); 
-        classEllipse objectEllipse = new classEllipse();
-        classRound objectRound = new classRound();
-        classLine objectLine = new classLine();
-        classTriangle objectTriangle = new classTriangle();
-  
+        #endregion
+
+        private Figure currentFigure = null;
+
         public Form3()
         {
             InitializeComponent();
         }
-        public void button1_Click(object sender, EventArgs e) //отрисовка прямоугольника
-        {
-             objectFigure.choiceFigure(1);
-        }
-        private void button2_Click(object sender, EventArgs e) //отрисовка элипса
-        {
-            objectFigure.choiceFigure(2);
-        }
-        private void button3_Click(object sender, EventArgs e)
-        {
-            objectFigure.choiceFigure(3);
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            objectFigure.choiceFigure(4);
-        }
-        private void button6_Click(object sender, EventArgs e)
-        {
-            objectFigure.choiceFigure(5);
-        }
-        private void panel1_MouseDown(object sender, MouseEventArgs e) //фиксирование начала координат для элемента
-        {
-            textBox3.Text = (objectFigure.x1 = e.X).ToString();
-            textBox4.Text = (objectFigure.y1 = e.Y).ToString();
-        }
-        private void panel1_MouseUp(object sender, MouseEventArgs e) 
-        {
-            textBox5.Text = (objectFigure.x2 = e.X).ToString();
-            textBox6.Text = (objectFigure.y2 = e.Y).ToString();
-            Graphics g = Graphics.FromHwnd(panel1.Handle);
 
-            switch (objectFigure.typeOfFigure)
+        public void selectFigure_Click(object sender, EventArgs e) //отрисовка прямоугольника
+        {
+            var button = sender as Button;
+            int typeFigure = int.Parse(button.Tag.ToString());
+
+            switch (typeFigure)
             {
                 case 1:
-                    objectRectangle.drawRectangle(g);
+                    currentFigure = new Rectangle();
                     break;
+
                 case 2:
-                    objectEllipse.drawEllipse(g);
+                    currentFigure = new Ellipse();
                     break;
+
                 case 3:
-                    objectRound.drawRound(g);
+                    currentFigure = new Round();
                     break;
+
                 case 4:
-                    objectLine.drawLine(g);
+                    currentFigure = new Line();
                     break;
+
                 case 5:
-                    objectTriangle.drawTriangle(g);
+                    currentFigure = new Triangle();
                     break;
+
                 default:
                     break;
             }
         }
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e) //фиксирование начала координат для элемента
+        {
+            if (currentFigure is null) return;
+
+            textBox3.Text = (currentFigure.x1 = e.X).ToString();
+            textBox4.Text = (currentFigure.y1 = e.Y).ToString();
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (currentFigure is null) return;
+
+            textBox5.Text = (currentFigure.x2 = e.X).ToString();
+            textBox6.Text = (currentFigure.y2 = e.Y).ToString();
+            Graphics g = Graphics.FromHwnd(panel1.Handle);
+
+            currentFigure.Draw(g);
+        }
+
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             textBox1.Text = e.X.ToString();
             textBox2.Text = e.Y.ToString();
         }
+
         private void button4_Click(object sender, EventArgs e)
         {
             panel1.BackColor = Color.White; //работает на раз

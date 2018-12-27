@@ -76,9 +76,10 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(104, 23);
             this.button3.TabIndex = 9;
+            this.button3.Tag = "3";
             this.button3.Text = "Круг";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.selectFigure_Click);
             // 
             // button2
             // 
@@ -86,9 +87,10 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 23);
             this.button2.TabIndex = 8;
+            this.button2.Tag = "2";
             this.button2.Text = "Элипс";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.selectFigure_Click);
             // 
             // button1
             // 
@@ -96,9 +98,10 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 23);
             this.button1.TabIndex = 7;
+            this.button1.Tag = "1";
             this.button1.Text = "Прямоугольник";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.selectFigure_Click);
             // 
             // label1
             // 
@@ -162,9 +165,10 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(104, 23);
             this.button5.TabIndex = 20;
+            this.button5.Tag = "4";
             this.button5.Text = "Прямая";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.selectFigure_Click);
             // 
             // button6
             // 
@@ -172,9 +176,10 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(104, 23);
             this.button6.TabIndex = 21;
+            this.button6.Tag = "5";
             this.button6.Text = "Треугольник";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.selectFigure_Click);
             // 
             // Form3
             // 
