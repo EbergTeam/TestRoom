@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Talgat1.Figure;
 
 namespace Talgat1
 {
     public partial class Form3 : Form
     {
-        private Figure currentFigure = null;
+        private BaseFigure currentFigure = null;
 
         public Form3()
         {
@@ -26,7 +27,7 @@ namespace Talgat1
             switch (typeFigure)
             {
                 case 1:
-                    currentFigure = new Rectangle();
+                    currentFigure = new Figure.Rectangle();
                     break;
 
                 case 2:

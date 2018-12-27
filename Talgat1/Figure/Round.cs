@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Talgat1.Figure
 {
-    public class Round : Figure
+    public class Round : BaseFigure
     {
         public override void Draw(Graphics a)
         {

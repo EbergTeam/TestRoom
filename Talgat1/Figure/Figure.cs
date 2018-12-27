@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Talgat1.Figure
 {
-    public class Figure
+    public abstract class BaseFigure
     {
         public int x1, y1, x2, y2;
 
