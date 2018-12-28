@@ -13,37 +13,47 @@ namespace Talgat1
     public partial class Form3 : Form
     {
         private BaseFigure currentFigure = null;
+        string[] colorsNames;
+        Color[] colors;
+        public int index;
 
         public Form3()
         {
             InitializeComponent();
+            colorsNames = new string[3] { "Красный", "Синий", "Зеленый" };
+            colors = new Color[3] { Color.Red, Color.Blue, Color.Green };
+            comboBox1.Items.AddRange(colorsNames);
+            comboBox1.SelectedIndex = 0;
+            index = 0;
         }
 
-        public void selectFigure_Click(object sender, EventArgs e) //отрисовка прямоугольника
+        public void selectFigure_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
             int typeFigure = int.Parse(button.Tag.ToString());
-            
+            index = comboBox1.SelectedIndex;
+            label6.Text = index.ToString();
+
             switch (typeFigure)
             {
                 case 1:
-                    currentFigure = new Figure.Rectangle();
+                    currentFigure = new Figure.Rectangle(colors[index]);
                     break;
 
                 case 2:
-                    currentFigure = new Ellipse();
+                    currentFigure = new Ellipse(colors[index]);
                     break;
 
                 case 3:
-                    currentFigure = new Round();
+                    currentFigure = new Round(colors[index]);
                     break;
 
                 case 4:
-                    currentFigure = new Line();
+                    currentFigure = new Line(colors[index]);
                     break;
 
                 case 5:
-                    currentFigure = new Triangle();
+                    currentFigure = new Triangle(colors[index]);
                     break;
 
                 default:
@@ -78,6 +88,11 @@ namespace Talgat1
         private void button4_Click(object sender, EventArgs e)
         {
             panel1.BackColor = Color.White; //работает на раз
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

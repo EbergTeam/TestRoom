@@ -11,9 +11,14 @@ namespace Talgat1.Figure
 {
     public class Line : BaseFigure
     {
+        public Line(Color _in)
+        {
+            bordercolor = _in;
+        }
+
         public override void Draw(Graphics a)
         {
-            a.DrawLine(new Pen(Brushes.Black, 2), x1, y1, x2, y2);
+            a.DrawLine(new Pen(bordercolor, 2), x1, y1, x2, y2);
         }
     }
 }

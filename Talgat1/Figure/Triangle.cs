@@ -11,10 +11,14 @@ namespace Talgat1.Figure
 {
     public class Triangle : BaseFigure
     {
+        public Triangle(Color _in)
+        {
+            bordercolor = _in;
+        }
         public override void Draw(Graphics a)
         {
             Point[] points = { new Point(x1, y1), new Point(x1, y2), new Point(x2, y1), new Point(x1, y1) };
-            a.DrawLines(new Pen(Brushes.Black, 2), points);
+            a.DrawLines(new Pen(bordercolor, 2), points);
         }
     }
 }
