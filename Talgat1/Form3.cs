@@ -17,6 +17,9 @@ namespace Talgat1
         Color[] colors;
         int index;
         Graphics graphics;
+        List<BaseFigure> figureConteiner = new List<BaseFigure>();
+        private int currentFigureType = 1;
+        private Color currentBorderColor = Color.Black;
 
         public Form3()
         {
@@ -37,66 +40,99 @@ namespace Talgat1
         public void selectFigure_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
-            int typeFigure = int.Parse(button.Tag.ToString());
-            index = comboBox1.SelectedIndex;
-            label6.Text = index.ToString();
+            currentFigureType = int.Parse(button.Tag.ToString());
+        }
 
-            switch (typeFigure)
+        private void panel1_MouseDown(object sender, MouseEventArgs e) //фиксирование начала координат для элемента
+        {
+            switch (currentFigureType)
             {
                 case 1:
-                    currentFigure = new Figure.Rectangle(colors[index]);
+                    currentFigure = new Figure.Rectangle(currentBorderColor);
                     break;
 
                 case 2:
-                    currentFigure = new Ellipse(colors[index]);
+                    currentFigure = new Ellipse(currentBorderColor);
                     break;
 
                 case 3:
-                    currentFigure = new Round(colors[index]);
+                    currentFigure = new Round(currentBorderColor);
                     break;
 
                 case 4:
-                    currentFigure = new Line(colors[index]);
+                    currentFigure = new Line(currentBorderColor);
                     break;
 
                 case 5:
-                    currentFigure = new Triangle(colors[index]);
+                    currentFigure = new Triangle(currentBorderColor);
                     break;
 
                 default:
                     break;
             }
+
+            textBox3.Text = (currentFigure.x1 = e.X).ToString(); // никогда не пиши так (currentFigure.x1 = e.X).ToString();
+            textBox4.Text = (currentFigure.y1 = e.Y).ToString(); // пиши раздельно.
+
+            figureConteiner.Add(currentFigure);
+
+            ReDrawAllFigures();
         }
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e) //фиксирование начала координат для элемента
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (currentFigure is null) return;
 
-            textBox3.Text = (currentFigure.x1 = e.X).ToString(); // никогда не пиши так (currentFigure.x1 = e.X).ToString();
-            textBox4.Text = (currentFigure.y1 = e.Y).ToString();
+            currentFigure.x2 = e.X;
+            currentFigure.y2 = e.Y;
+
+            textBox1.Text = e.X.ToString();
+            textBox2.Text = e.Y.ToString();
+
+            ReDrawAllFigures();
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             if (currentFigure is null) return;
 
-            textBox5.Text = (currentFigure.x2 = e.X).ToString();
-            textBox6.Text = (currentFigure.y2 = e.Y).ToString();
-            currentFigure.Draw(graphics);
-        }
+            currentFigure.x2 = e.X;
+            currentFigure.y2 = e.Y;
 
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
-        {
-            textBox1.Text = e.X.ToString();
-            textBox2.Text = e.Y.ToString();
+            textBox5.Text = e.X.ToString();
+            textBox6.Text = e.Y.ToString();
+
+            ReDrawAllFigures();
+
+            currentFigure = null;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            RemoveAllFigures();
+        }
+
+        void ReDrawAllFigures()
+        {
             ClearGraphics();
+            foreach (var figure in figureConteiner)
+                figure.Draw(graphics);
         }
 
         void ClearGraphics() =>           //погугли зачем тут стрелка. Полезно новое узнать, не сможешь найти, забей, сам объясню
             graphics?.Clear(Color.White); // тоже самое со значком ?
+
+        void RemoveAllFigures()
+        {
+            figureConteiner.Clear();
+            ClearGraphics();
+        }
+
+        private void BorderColorChanged(object sender, EventArgs e)
+        {
+            index = comboBox1.SelectedIndex;
+            label6.Text = index.ToString();
+            currentBorderColor = colors[index];
+        }
     }
 }

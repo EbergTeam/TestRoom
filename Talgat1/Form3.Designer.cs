@@ -55,9 +55,9 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -225,6 +225,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(104, 21);
             this.comboBox1.TabIndex = 26;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.BorderColorChanged);
             // 
             // label6
             // 
@@ -335,6 +336,15 @@
             this.panel6.Size = new System.Drawing.Size(116, 72);
             this.panel6.TabIndex = 33;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 4);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(70, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Примечание";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -352,15 +362,6 @@
             this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 29;
             this.label8.Text = "1. Выбрать цвет";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 4);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 13);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "Примечание";
             // 
             // Form3
             // 
