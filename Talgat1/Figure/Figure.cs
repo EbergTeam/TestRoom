@@ -12,7 +12,8 @@ namespace Talgat1.Figure
     public abstract class BaseFigure
     {
         public int x1, y1, x2, y2;
-        public Color bordercolor;
+        public Color borderСolor; // именуй правильно. СловаИзДвухСловДелятсяБольшимиБуквами
+                                  // то что отмечено как public, всегда должно начинаться с большой буквы.
         public abstract void Draw(Graphics a);
     }
 }

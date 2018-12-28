@@ -15,7 +15,7 @@ namespace Talgat1
         private BaseFigure currentFigure = null;
         string[] colorsNames;
         Color[] colors;
-        public int index;
+        int index;
 
         public Form3()
         {
