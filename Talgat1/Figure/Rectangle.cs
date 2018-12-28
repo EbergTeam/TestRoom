@@ -11,13 +11,12 @@ namespace Talgat1.Figure
 {
     public class Rectangle : BaseFigure
     {
-        public Rectangle(Color _in)
+        public Rectangle(Color borderColor) : base(borderColor)
         {
-            borderСolor = _in;
         }
         public override void Draw(Graphics a)
         {
-            a.DrawRectangle(new Pen(borderСolor,2), x1, y1, x2 - x1, y2 - y1);
+            a.DrawRectangle(new Pen(BorderColor, 2), x1, y1, x2 - x1, y2 - y1);
         }
     }
 }
