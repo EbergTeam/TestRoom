@@ -13,11 +13,11 @@ namespace Talgat1
     public partial class Form3 : Form
     {
         private BaseFigure currentFigure = null;
-        string[] colorsNames;
-        Color[] colors;
-        int index;
-        Graphics graphics;
-        List<BaseFigure> figureConteiner = new List<BaseFigure>();
+        private string[] colorsNames;
+        private Color[] colors;
+        private int index;
+        private Graphics graphics;
+        private List<BaseFigure> figureConteiner = new List<BaseFigure>();
         private int currentFigureType = 1;
         private Color currentBorderColor = Color.Black;
 
@@ -112,17 +112,17 @@ namespace Talgat1
             RemoveAllFigures();
         }
 
-        void ReDrawAllFigures()
+        private void ReDrawAllFigures()
         {
             ClearGraphics();
             foreach (var figure in figureConteiner)
                 figure.Draw(graphics);
         }
 
-        void ClearGraphics() =>           //погугли зачем тут стрелка. Полезно новое узнать, не сможешь найти, забей, сам объясню
+        private void ClearGraphics() =>           //погугли зачем тут стрелка. Полезно новое узнать, не сможешь найти, забей, сам объясню
             graphics?.Clear(Color.White); // тоже самое со значком ?
 
-        void RemoveAllFigures()
+        private void RemoveAllFigures()
         {
             figureConteiner.Clear();
             ClearGraphics();
