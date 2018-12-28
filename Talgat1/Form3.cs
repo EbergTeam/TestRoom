@@ -16,6 +16,7 @@ namespace Talgat1
         string[] colorsNames;
         Color[] colors;
         int index;
+        Graphics graphics;
 
         public Form3()
         {
@@ -25,6 +26,7 @@ namespace Talgat1
             comboBox1.Items.AddRange(colorsNames);
             comboBox1.SelectedIndex = 0;
             index = 0;
+            graphics = panel1.CreateGraphics();
         }
 
         public void selectFigure_Click(object sender, EventArgs e)
@@ -65,7 +67,7 @@ namespace Talgat1
         {
             if (currentFigure is null) return;
 
-            textBox3.Text = (currentFigure.x1 = e.X).ToString();
+            textBox3.Text = (currentFigure.x1 = e.X).ToString(); // никогда не пиши так (currentFigure.x1 = e.X).ToString();
             textBox4.Text = (currentFigure.y1 = e.Y).ToString();
         }
 
@@ -75,8 +77,7 @@ namespace Talgat1
 
             textBox5.Text = (currentFigure.x2 = e.X).ToString();
             textBox6.Text = (currentFigure.y2 = e.Y).ToString();
-            Graphics g = Graphics.FromHwnd(panel1.Handle);
-            currentFigure.Draw(g);
+            currentFigure.Draw(graphics);
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
@@ -87,7 +88,7 @@ namespace Talgat1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            panel1.BackColor = Color.White; //работает на раз
+            graphics.Clear(Color.White);
         }
 
         private void Form3_Load(object sender, EventArgs e)
