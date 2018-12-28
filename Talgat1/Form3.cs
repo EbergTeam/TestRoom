@@ -27,6 +27,11 @@ namespace Talgat1
             comboBox1.SelectedIndex = 0;
             index = 0;
             graphics = panel1.CreateGraphics();
+            panel1.BackColor = Color.White;
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
         }
 
         public void selectFigure_Click(object sender, EventArgs e)
@@ -88,12 +93,10 @@ namespace Talgat1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            graphics.Clear(Color.White);
+            ClearGraphics();
         }
 
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
-        }
+        void ClearGraphics() =>           //погугли зачем тут стрелка. Полезно новое узнать, не сможешь найти, забей, сам объясню
+            graphics?.Clear(Color.White); // тоже самое со значком ?
     }
 }
