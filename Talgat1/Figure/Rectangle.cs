@@ -14,9 +14,9 @@ namespace Talgat1.Figure
         public Rectangle(Color borderColor) : base(borderColor)
         {
         }
-        public override void Draw(Graphics a)
+        public override void Draw(Graphics graphics)
         {
-            a.DrawRectangle(new Pen(BorderColor, 2), x1, y1, x2 - x1, y2 - y1);
+            graphics.DrawRectangle(new Pen(BorderColor, 2), x1, y1, x2 - x1, y2 - y1);
         }
     }
 }

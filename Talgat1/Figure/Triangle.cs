@@ -14,10 +14,10 @@ namespace Talgat1.Figure
         public Triangle(Color borderColor) : base(borderColor)
         {
         }
-        public override void Draw(Graphics a)
+        public override void Draw(Graphics graphics)
         {
             Point[] points = { new Point(x1, y1), new Point(x1, y2), new Point(x2, y1), new Point(x1, y1) };
-            a.DrawLines(new Pen(BorderColor, 2), points);
+            graphics.DrawLines(new Pen(BorderColor, 2), points);
         }
     }
 }

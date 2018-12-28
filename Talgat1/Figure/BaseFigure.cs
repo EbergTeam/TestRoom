@@ -27,6 +27,6 @@ namespace Talgat1.Figure
             set { _borderСolor = value; }
         }
 
-        public abstract void Draw(Graphics a);
+        public abstract void Draw(Graphics graphics);
     }
 }

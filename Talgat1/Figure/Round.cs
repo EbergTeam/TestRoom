@@ -14,9 +14,9 @@ namespace Talgat1.Figure
         public Round(Color borderColor) : base(borderColor)
         {
         }
-        public override void Draw(Graphics a)
+        public override void Draw(Graphics graphics)
         {
-            a.DrawEllipse(new Pen(BorderColor, 2), x1, y1, x2 - x1, x2 - x1);
+            graphics.DrawEllipse(new Pen(BorderColor, 2), x1, y1, x2 - x1, x2 - x1);
         }
     }
 }

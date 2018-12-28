@@ -15,9 +15,9 @@ namespace Talgat1.Figure
         {
         }
 
-        public override void Draw(Graphics a)
+        public override void Draw(Graphics graphics)
         {
-            a.DrawEllipse(new Pen(BorderColor, 2), x1, y1, x2 - x1, y2 - y1);
+            graphics.DrawEllipse(new Pen(BorderColor, 2), x1, y1, x2 - x1, y2 - y1);
         }
     }
 }
